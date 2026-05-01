@@ -1,0 +1,1160 @@
+{
+  "meta": {
+    "reviewer": "RuleBasedReviewer_v1",
+    "timestamp": "2026-05-01T03:20:19.752031",
+    "total_requirements": 10,
+    "mutators_applied": 5
+  },
+  "summary": {
+    "total_tests": 46,
+    "true_positives": 38,
+    "false_negatives": 8,
+    "detection_rate_pct": 82.6
+  },
+  "by_defect_type": {
+    "WEAK_MODAL": {
+      "total": 10,
+      "caught": 10,
+      "missed": 0,
+      "detection_rate_pct": 100.0,
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ]
+    },
+    "VAGUE_TIMING": {
+      "total": 9,
+      "caught": 9,
+      "missed": 0,
+      "detection_rate_pct": 100.0,
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ]
+    },
+    "PASSIVE_VOICE": {
+      "total": 10,
+      "caught": 10,
+      "missed": 0,
+      "detection_rate_pct": 100.0,
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ]
+    },
+    "MISSING_CONDITION": {
+      "total": 8,
+      "caught": 0,
+      "missed": 8,
+      "detection_rate_pct": 0.0,
+      "expected_rules": []
+    },
+    "TBD_PLACEHOLDER": {
+      "total": 9,
+      "caught": 9,
+      "missed": 0,
+      "detection_rate_pct": 100.0,
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ]
+    }
+  },
+  "test_log": [
+    {
+      "req_id": "REQ-001",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The flight control system shall respond to pilot input within 200 milliseconds under all operating conditions.",
+      "mutated_text": "The flight control system should respond to pilot input within 200 milliseconds under all operating conditions.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-001",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '200 milliseconds' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The flight control system shall respond to pilot input within 200 milliseconds under all operating conditions.",
+      "mutated_text": "The flight control system shall respond to pilot input within quickly under all operating conditions.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-001",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The flight control system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The flight control system shall respond to pilot input within 200 milliseconds under all operating conditions.",
+      "mutated_text": "It shall be ensured that respond to pilot input within 200 milliseconds under all operating conditions.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-001",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'under all operating conditions'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The flight control system shall respond to pilot input within 200 milliseconds under all operating conditions.",
+      "mutated_text": "The flight control system shall respond to pilot input within 200 milliseconds.",
+      "expected_rules": [],
+      "rules_triggered": [],
+      "issues_found": [],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-001",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '200 milliseconds' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The flight control system shall respond to pilot input within 200 milliseconds under all operating conditions.",
+      "mutated_text": "The flight control system shall respond to pilot input within [TBD] under all operating conditions.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-002",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The autopilot system shall disengage within 500 milliseconds upon detection of manual override activation.",
+      "mutated_text": "The autopilot system should disengage within 500 milliseconds upon detection of manual override activation.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-002",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '500 milliseconds' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The autopilot system shall disengage within 500 milliseconds upon detection of manual override activation.",
+      "mutated_text": "The autopilot system shall disengage within quickly upon detection of manual override activation.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-002",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The autopilot system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The autopilot system shall disengage within 500 milliseconds upon detection of manual override activation.",
+      "mutated_text": "It shall be ensured that disengage within 500 milliseconds upon detection of manual override activation.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-002",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'upon detection of manual override activation'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The autopilot system shall disengage within 500 milliseconds upon detection of manual override activation.",
+      "mutated_text": "The autopilot system shall disengage within 500 milliseconds.",
+      "expected_rules": [],
+      "rules_triggered": [],
+      "issues_found": [],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-002",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '500 milliseconds' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The autopilot system shall disengage within 500 milliseconds upon detection of manual override activation.",
+      "mutated_text": "The autopilot system shall disengage within [TBD] upon detection of manual override activation.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-003",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The navigation display shall update position data at a minimum rate of 10 Hz during flight operations.",
+      "mutated_text": "The navigation display should update position data at a minimum rate of 10 Hz during flight operations.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-003",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '10 Hz' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The navigation display shall update position data at a minimum rate of 10 Hz during flight operations.",
+      "mutated_text": "The navigation display shall update position data at a minimum rate of quickly during flight operations.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-003",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The navigation display', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The navigation display shall update position data at a minimum rate of 10 Hz during flight operations.",
+      "mutated_text": "It shall be ensured that update position data at a minimum rate of 10 Hz during flight operations.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-003",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'during flight operations'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The navigation display shall update position data at a minimum rate of 10 Hz during flight operations.",
+      "mutated_text": "The navigation display shall update position data at a minimum rate of 10 Hz.",
+      "expected_rules": [],
+      "rules_triggered": [],
+      "issues_found": [],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-003",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '10 Hz' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The navigation display shall update position data at a minimum rate of 10 Hz during flight operations.",
+      "mutated_text": "The navigation display shall update position data at a minimum rate of [TBD] during flight operations.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-004",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The warning system shall activate an audible alert when cabin pressure drops below 75 kPa.",
+      "mutated_text": "The warning system should activate an audible alert when cabin pressure drops below 75 kPa.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-004",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '75 kPa' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The warning system shall activate an audible alert when cabin pressure drops below 75 kPa.",
+      "mutated_text": "The warning system shall activate an audible alert when cabin pressure drops below quickly.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-004",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The warning system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The warning system shall activate an audible alert when cabin pressure drops below 75 kPa.",
+      "mutated_text": "It shall be ensured that activate an audible alert when cabin pressure drops below 75 kPa.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-004",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'when cabin pressure drops below 75 kPa'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The warning system shall activate an audible alert when cabin pressure drops below 75 kPa.",
+      "mutated_text": "The warning system shall activate an audible alert.",
+      "expected_rules": [],
+      "rules_triggered": [
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-004",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '75 kPa' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The warning system shall activate an audible alert when cabin pressure drops below 75 kPa.",
+      "mutated_text": "The warning system shall activate an audible alert when cabin pressure drops below [TBD].",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-005",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The data recorder shall store a minimum of 25 hours of flight data in non-volatile memory.",
+      "mutated_text": "The data recorder should store a minimum of 25 hours of flight data in non-volatile memory.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-005",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '25 hours' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The data recorder shall store a minimum of 25 hours of flight data in non-volatile memory.",
+      "mutated_text": "The data recorder shall store a minimum of quickly of flight data in non-volatile memory.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-005",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The data recorder', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The data recorder shall store a minimum of 25 hours of flight data in non-volatile memory.",
+      "mutated_text": "It shall be ensured that store a minimum of 25 hours of flight data in non-volatile memory.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-005",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '25 hours' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The data recorder shall store a minimum of 25 hours of flight data in non-volatile memory.",
+      "mutated_text": "The data recorder shall store a minimum of [TBD] of flight data in non-volatile memory.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-006",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The landing gear system shall fully extend or retract within 10 seconds of receiving the control signal.",
+      "mutated_text": "The landing gear system should fully extend or retract within 10 seconds of receiving the control signal.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-006",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '10 seconds' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The landing gear system shall fully extend or retract within 10 seconds of receiving the control signal.",
+      "mutated_text": "The landing gear system shall fully extend or retract within quickly of receiving the control signal.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-006",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The landing gear system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The landing gear system shall fully extend or retract within 10 seconds of receiving the control signal.",
+      "mutated_text": "It shall be ensured that fully extend or retract within 10 seconds of receiving the control signal.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-006",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'of receiving the control signal'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The landing gear system shall fully extend or retract within 10 seconds of receiving the control signal.",
+      "mutated_text": "The landing gear system shall fully extend or retract within 10 seconds.",
+      "expected_rules": [],
+      "rules_triggered": [],
+      "issues_found": [],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-006",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '10 seconds' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The landing gear system shall fully extend or retract within 10 seconds of receiving the control signal.",
+      "mutated_text": "The landing gear system shall fully extend or retract within [TBD] of receiving the control signal.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-007",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The engine monitoring system shall log temperature, pressure, and RPM values every 100 milliseconds.",
+      "mutated_text": "The engine monitoring system should log temperature, pressure, and RPM values every 100 milliseconds.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-007",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '100 milliseconds' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The engine monitoring system shall log temperature, pressure, and RPM values every 100 milliseconds.",
+      "mutated_text": "The engine monitoring system shall log temperature, pressure, and RPM values every quickly.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-007",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The engine monitoring system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The engine monitoring system shall log temperature, pressure, and RPM values every 100 milliseconds.",
+      "mutated_text": "It shall be ensured that log temperature, pressure, and RPM values every 100 milliseconds.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-007",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '100 milliseconds' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The engine monitoring system shall log temperature, pressure, and RPM values every 100 milliseconds.",
+      "mutated_text": "The engine monitoring system shall log temperature, pressure, and RPM values every [TBD].",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-008",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The communication system shall maintain encrypted radio contact with ground control throughout the mission.",
+      "mutated_text": "The communication system should maintain encrypted radio contact with ground control throughout the mission.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "NO_MEASURABLE_VALUE",
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-008",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The communication system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The communication system shall maintain encrypted radio contact with ground control throughout the mission.",
+      "mutated_text": "It shall be ensured that maintain encrypted radio contact with ground control throughout the mission.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-008",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'throughout the mission'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The communication system shall maintain encrypted radio contact with ground control throughout the mission.",
+      "mutated_text": "The communication system shall maintain encrypted radio contact with ground control.",
+      "expected_rules": [],
+      "rules_triggered": [
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-009",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The fuel management system shall alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "mutated_text": "The fuel management system should alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-009",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '15 percent' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The fuel management system shall alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "mutated_text": "The fuel management system shall alert the crew when remaining fuel drops below quickly of total capacity.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-009",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The fuel management system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The fuel management system shall alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "mutated_text": "It shall be ensured that alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-009",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'when remaining fuel drops below 15 percent of total capacity'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The fuel management system shall alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "mutated_text": "The fuel management system shall alert the crew.",
+      "expected_rules": [],
+      "rules_triggered": [
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-009",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '15 percent' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The fuel management system shall alert the crew when remaining fuel drops below 15 percent of total capacity.",
+      "mutated_text": "The fuel management system shall alert the crew when remaining fuel drops below [TBD] of total capacity.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-010",
+      "defect_type": "WEAK_MODAL",
+      "defect_description": "Changed 'shall' to 'should' \u2014 removes mandatory enforcement. In requirements engineering, 'shall' is mandatory; 'should' is optional.",
+      "original_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "mutated_text": "The collision avoidance system should issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "expected_rules": [
+        "WEAK_MODAL",
+        "MISSING_SHALL"
+      ],
+      "rules_triggered": [
+        "MISSING_SHALL",
+        "WEAK_MODAL"
+      ],
+      "issues_found": [
+        {
+          "rule": "MISSING_SHALL",
+          "description": "Requirement does not use 'shall'. Mandatory requirements must use 'shall'.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "WEAK_MODAL",
+          "description": "Found weak modal verb: 'should'. Use 'shall' for mandatory requirements. 'Should' implies discretion, not obligation.",
+          "severity": "HIGH"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-010",
+      "defect_type": "VAGUE_TIMING",
+      "defect_description": "Replaced specific measurable value '35 seconds' with vague term 'quickly'. Vague timing makes requirements untestable.",
+      "original_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "mutated_text": "The collision avoidance system shall issue a resolution advisory within quickly of detecting a traffic conflict.",
+      "expected_rules": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "rules_triggered": [
+        "VAGUE_TERM",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "VAGUE_TERM",
+          "description": "Found vague term(s): ['quickly']. Replace with specific, measurable criteria that can be verified.",
+          "severity": "HIGH"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-010",
+      "defect_type": "PASSIVE_VOICE",
+      "defect_description": "Removed system actor 'The collision avoidance system', obscuring which system is responsible. Passive voice hides accountability and complicates test case writing.",
+      "original_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "mutated_text": "It shall be ensured that issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "expected_rules": [
+        "PASSIVE_VOICE"
+      ],
+      "rules_triggered": [
+        "PASSIVE_VOICE"
+      ],
+      "issues_found": [
+        {
+          "rule": "PASSIVE_VOICE",
+          "description": "Requirement appears to use passive voice. Specify a clear system actor (e.g., 'The flight control system shall...').",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    },
+    {
+      "req_id": "REQ-010",
+      "defect_type": "MISSING_CONDITION",
+      "defect_description": "Removed qualifying condition: 'of detecting a traffic conflict'. Missing conditions make it unclear when the requirement applies, creating gaps in verification coverage.",
+      "original_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "mutated_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds.",
+      "expected_rules": [],
+      "rules_triggered": [],
+      "issues_found": [],
+      "outcome": "MISSED"
+    },
+    {
+      "req_id": "REQ-010",
+      "defect_type": "TBD_PLACEHOLDER",
+      "defect_description": "Replaced defined value '35 seconds' with TBD placeholder. Requirements with TBD values cannot be verified or tested.",
+      "original_text": "The collision avoidance system shall issue a resolution advisory within 35 seconds of detecting a traffic conflict.",
+      "mutated_text": "The collision avoidance system shall issue a resolution advisory within [TBD] of detecting a traffic conflict.",
+      "expected_rules": [
+        "TBD_PLACEHOLDER"
+      ],
+      "rules_triggered": [
+        "TBD_PLACEHOLDER",
+        "NO_MEASURABLE_VALUE"
+      ],
+      "issues_found": [
+        {
+          "rule": "TBD_PLACEHOLDER",
+          "description": "Requirement contains unresolved placeholder 'tbd'. All values must be defined before requirements are baselined.",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule": "NO_MEASURABLE_VALUE",
+          "description": "Performance requirement contains no measurable values (numbers + units). Requirements must be verifiable with specific thresholds.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "outcome": "CAUGHT"
+    }
+  ]
+}
