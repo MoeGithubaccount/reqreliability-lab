@@ -11,3 +11,4 @@
 # ── Optional: for enhanced reporting ────────────────────────
 # pandas>=2.0.0
 # matplotlib>=3.7.0
+streamlit
