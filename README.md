@@ -180,5 +180,5 @@ This project draws on:
 ## Author
 
 Mohamed Ibrahim  
-AI Support Consultant | University of Iowa  
+AI Consultant
 [LinkedIn](https://www.linkedin.com/in/mohamed-ibrahim-91b393103/)
