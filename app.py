@@ -116,7 +116,7 @@ st.subheader("Stress-testing automated requirements reviewers")
 st.write(
     """
     This prototype tests whether an automated reviewer can catch known defects
-    in synthetic safety-critical-style requirements.
+    in synthetic technical requirements, workflow rules, and acceptance criteria.
 
     It can run a built-in baseline experiment, or you can paste your own requirement
     to see what the reviewer flags.
@@ -124,7 +124,7 @@ st.write(
 )
 
 st.warning(
-    "Prototype only. Uses synthetic examples. Do not enter sensitive, proprietary, student, patient, employer, defense, or confidential data."
+    "Prototype only. Uses synthetic examples. Do not enter sensitive, proprietary, regulated, employer, student, patient, customer, or confidential data."
 )
 
 tab1, tab2, tab3 = st.tabs(["Run Demo Experiment", "Try Your Own Requirement", "About"])
@@ -250,7 +250,7 @@ with tab2:
 
     st.write(
         """
-        Paste one requirement, acceptance criterion, or technical statement below.
+        Paste a requirement, acceptance criterion, support workflow, project task, or technical statement below.
         The reviewer will flag wording that may be hard to test, verify, or assign clearly.
         """
     )
@@ -292,7 +292,7 @@ with tab3:
         The key idea is simple: before trusting an automated reviewer, test what it catches
         and what it misses.
 
-        The built-in demo creates known defects in synthetic safety-critical-style requirements.
+        The built-in demo creates known defects in synthetic technical requirements.
         The tool then measures whether the reviewer catches them.
 
         This is useful beyond aerospace-style examples. Product managers, QA testers,
